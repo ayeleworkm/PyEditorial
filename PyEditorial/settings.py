@@ -27,6 +27,7 @@ SECRET_KEY = '^rz9wrbb#ig!tl)4c$!o_^01ef8(rtxe(i()$ph61$8+mh^v_8'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Application definition
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'content.apps.ContentConfig',
+    
 ]
 
 MIDDLEWARE = [

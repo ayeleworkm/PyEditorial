@@ -52,6 +52,11 @@ class BlogCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.Cr
 
     def get_success_url(self):
         return reverse('content:blog_category_create')
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
 
 
 class Blog(generic.ListView):
@@ -66,6 +71,11 @@ class BlogCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView
 
     def get_success_url(self):
         return reverse('content:blog_create')
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
 
 
 class BlogArchiveByCategoryPK(generic.ListView):
@@ -92,6 +102,11 @@ class VideocastCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, gener
     def get_success_url(self):
         return reverse('content:videocast_category_create')
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
+
 
 class Videocast(generic.ListView):
     model = models.Videocast
@@ -105,6 +120,11 @@ class VideocastCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.Creat
 
     def get_success_url(self):
         return reverse('content:videocast_create')
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
 
 
 class VideocastArchiveByCategoryPK(generic.ListView):
@@ -130,6 +150,11 @@ class PodcastCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic
 
     def get_success_url(self):
         return reverse('content:podcast_category_create')
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
 
 
 class Podcast(generic.ListView):
@@ -144,6 +169,11 @@ class PodcastCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateV
 
     def get_success_url(self):
         return reverse('content:podcast_create')
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PodArchiveByCategoryPK(generic.ListView):
@@ -169,3 +199,8 @@ class SkillCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateVie
 
     def get_success_url(self):
         return reverse('content:skill_create')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return redirect('content:index')  # Redirect non-admin users from creating blogs
+        return super().dispatch(request, *args, **kwargs)
