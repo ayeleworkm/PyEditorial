@@ -3,7 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.Index.as_view(), name='index'),
+    path('', views.Home.as_view(), name='home'),
+    path('blogs', views.Index.as_view(), name='index'),
     path('search/', views.Search.as_view(), name='search'),
     path('blog/', views.Blog.as_view(), name='blog'),
     path('create/blog/', views.BlogCreateView.as_view(), name='blog_create'),
@@ -21,4 +22,5 @@ urlpatterns = [
     path('podcast/<int:pk>/', views.PodArchiveByCategoryPK.as_view(), name='podcast_archive_by_category_pk'),
     path('podcast/<str:slug>/', views.PodSingle.as_view(), name='podcast_single'),
     path('create/skill/', views.SkillCreateView.as_view(), name='skill_create'),
+
 ]

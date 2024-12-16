@@ -21,6 +21,7 @@
         <div class="inner">
 
             <!-- Header -->
+            {% if request.user.is_superuser %}
             <header id="header">
                 <a href="{% url 'content:index' %}" class="logo"><strong>{{ config.SITE_TITLE }}</strong></a>
                 <ul class="icons">
@@ -58,6 +59,7 @@
                     {% endif %}
                 </ul>
             </header>
+            {%endif %}
             <!-- /Header -->
 
             {% block content %}
@@ -118,6 +120,7 @@
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">{% translate 'Logout' %}</a></li>
 
+                    {% if request.user.is_superuser %}
                     <li>
                         <span class="opener">{% translate 'Create New Objects' %}</span>
                         <ul>
@@ -135,6 +138,7 @@
                             <li><a href="{% url 'content:podcast_category_create' %}">{% translate 'New Podcast Category' %}</a></li>
                         </ul>
                     </li>
+                    {% endif %}
                     {% endif %}
                 </ul>
             </nav>

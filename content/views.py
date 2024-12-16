@@ -8,6 +8,19 @@ from django.db.models import Q
 from . import models
 from .forms import SearchForm
 
+class Home(View):
+    template_name = 'home.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            'last_blog': models.Blog.objects.order_by('-pk').filter(publish=True)[:1],
+            'skills': models.Skill.objects.all(),
+            'blogs': models.Blog.objects.order_by('-pk').filter(publish=True)[1:5],
+            'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
+        }
+        return render(request, self.template_name, context)
+
+
 
 class Index(View):
     template_name = 'index.html'
@@ -20,6 +33,7 @@ class Index(View):
             'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
         }
         return render(request, self.template_name, context)
+
 
 
 class Search(View):
