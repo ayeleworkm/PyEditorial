@@ -1,0 +1,16 @@
+asgiref
+Django
+django-allauth
+django-ckeditor
+django-constance
+django-js-asset
+django-picklefield
+pillow
+pip
+python-memcached
+pytz
+setuptools
+six
+sqlparse
+tzdata
+wheel

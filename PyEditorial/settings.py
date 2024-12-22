@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'content.apps.ContentConfig',
+    'allauth',
+    'allauth.account',
+
     
 ]
 
@@ -55,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'PyEditorial.urls'
@@ -71,9 +76,21 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'content.context_processors.show_system_content',
+                
             ],
         },
     },
+]
+
+
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
 ]
 
 WSGI_APPLICATION = 'PyEditorial.wsgi.application'
@@ -151,6 +168,17 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
+#email sender information
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'test.mailed.login@gmail.com'
+# EMAIL_HOST_PASSWORD = 'vsfgnbvlzrgjoqge'  
+# DEFAULT_FROM_EMAIL = 'Your Website <your-email@gmail.com>'
+
+
 # CKEditor
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -167,11 +195,12 @@ CONSTANCE_IGNORE_ADMIN_VERSION_CHECK = True
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',  # Memcached server address
     }
 }
-CONSTANCE_DATABASE_CACHE_BACKEND = 'default'
+
+
 
 CONSTANCE_ADDITIONAL_FIELDS = {
     'yes_no_select': ['django.forms.fields.ChoiceField', {
