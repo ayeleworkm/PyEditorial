@@ -179,6 +179,12 @@ MEDIA_URL = '/media/'
 # DEFAULT_FROM_EMAIL = 'Your Website <your-email@gmail.com>'
 
 
+#django-allauth settings
+
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
 # CKEditor
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -195,7 +201,8 @@ CONSTANCE_IGNORE_ADMIN_VERSION_CHECK = True
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        # 'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         'LOCATION': '127.0.0.1:11211',  # Memcached server address
     }
 }
@@ -264,3 +271,5 @@ CONSTANCE_CONFIG_FIELDSETS = {
 LOGIN_REDIRECT_URL = 'content:index'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'content:index'
+
+

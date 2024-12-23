@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<section>
+    <header class="main">
+        <h1> Sign up</h1>
+    </header>
+	{% for message in messages %}
+	<div>{{message}}</div>
+	{% endfor %}
+	<div class="row">
+		<div class="col-6 col-12-small">
+			<form method="post" id="auth_form">
+				{% csrf_token %}
+				{{ form }}
+                <p>Already have an account? <a href="{% url 'account_login' %}">Login here</a></p>
+			
+                <input style="margin-top: 1rem;" type="submit" value="{% translate 'Signup' %}" class="button primary">
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock content %}

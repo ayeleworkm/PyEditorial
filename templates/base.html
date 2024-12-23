@@ -115,10 +115,10 @@
                         </ul>
                     </li>
                     {% if user.is_anonymous %}
-                    <li><a href="{% url 'login' %}">{% translate 'Login' %}</a></li>
+                    <li><a href="{% url 'account_login' %}">{% translate 'Login' %}</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">{% translate 'Logout' %}</a></li>
+                    <li><a href="{% url 'account_logout' %}">{% translate 'Logout' %}</a></li>
 
                     {% if request.user.is_superuser %}
                     <li>

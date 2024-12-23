@@ -6,14 +6,20 @@
     <header class="main">
         <h1>{% translate 'Login' %}</h1>
     </header>
+	{% for message in messages %}
+	<div>{{message}}</div>
+	{% endfor %}
 	<div class="row">
 		<div class="col-6 col-12-small">
 			<form method="post" id="auth_form">
 				{% csrf_token %}
 				{{ form }}
+			<p>Don't have an account? <a href="{% url 'account_signup' %}">Register here</a></p>
+				
 				<input type="submit" value="{% translate 'Login' %}" class="button primary">
-				<a href="{% url 'password_reset' %}" class="button">{% translate 'Forget Password ?' %}</a>
+				
 			</form>
+			
 		</div>
 	</div>
 </section>
