@@ -1,1 +1,40 @@
 {%extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
+
+
+    <script src="{% static 'assets/js/home.js' %}" async>
+        
+    </script>
+</head>
+<body>
+    <section class="home-sections" id="landing-page">
+        <div id="landing-page-image"></div>
+    </section>
+    <section class="home-sections">
+
+        <div class="container">
+            <div class="image-section">
+                <img src="https://picsum.photos/200/100" alt=""> 
+                
+            </div>
+            <div class="text-section">
+                <div class="tabs">
+                    <div id="mission" class="tab active" onclick="showContent('mission')">Mission</div>
+                    <div id="vision" class="tab" onclick="showContent('vision')">Vision</div>
+                    <div id="objective" class="tab" onclick="showContent('objective')">Objective</div>
+                </div>
+                <div id="content" class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatum amet ad. Iusto consectetur magnam incidunt impedit voluptatum sequi possimus repellat ratione deserunt, adipisci corporis voluptates autem, quae ex eaque labore odio optio nam ut eveniet? Magni dignissimos fugit dolore excepturi nemo eligendi veniam aliquid error, animi incidunt? Nam, dolorum!</div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+}
+.home-sections{
+    height: 100vh;
+}
+#landing-page-image{
+    background-image: url('https://picsum.photos/1080/566');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1000;
+    top: 0;
+    left: 0;
+    
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px;
+}
+.image-section {
+    flex: 1;
+    min-width: 300px;
+}
+.image-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.text-section {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    text-align: center;
+}
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.tab {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+}
+.tab.active {
+    border-bottom: 2px solid orange;
+}
+.content {
+    margin-top: 10px;
+}

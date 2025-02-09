@@ -14,7 +14,7 @@ class Home(View):
     def get(self, request, *args, **kwargs):
         context = {
             'last_blog': models.Blog.objects.order_by('-pk').filter(publish=True)[:1],
-            'skills': models.Skill.objects.all(),
+            # 'skills': models.Skill.objects.all(),
             'blogs': models.Blog.objects.order_by('-pk').filter(publish=True)[1:5],
             'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
         }
@@ -28,7 +28,7 @@ class Index(View):
     def get(self, request, *args, **kwargs):
         context = {
             'last_blog': models.Blog.objects.order_by('-pk').filter(publish=True)[:1],
-            'skills': models.Skill.objects.all(),
+            # 'skills': models.Skill.objects.all(),
             'blogs': models.Blog.objects.order_by('-pk').filter(publish=True)[1:5],
             'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
         }
@@ -206,15 +206,15 @@ class PodSingle(generic.DetailView):
         return self.model.objects.filter(slug=self.kwargs['slug'])
 
 
-class SkillCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
-    model = models.Skill
-    fields = '__all__'
-    success_message = 'Skill was created successfully'
+# class SkillCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+#     model = models.Skill
+#     fields = '__all__'
+#     success_message = 'Skill was created successfully'
 
-    def get_success_url(self):
-        return reverse('content:skill_create')
+#     def get_success_url(self):
+#         return reverse('content:skill_create')
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.is_staff:
+#             return redirect('content:index')  # Redirect non-admin users from creating blogs
+#         return super().dispatch(request, *args, **kwargs)

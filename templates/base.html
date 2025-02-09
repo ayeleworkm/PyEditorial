@@ -86,10 +86,10 @@
                     <h2>Menu</h2>
                 </header>
                 <ul>
-                    <li><a href="{% url 'content:index' %}">{% translate 'Home Page' %}</a></li>
-                    <li><a href="{% url 'content:blog' %}">{% translate 'Blog' %}</a></li>
+                    <li><a href="{% url 'content:home' %}">{% translate 'Home Page' %}</a></li>
+                    <li><a href="{% url 'content:blog' %}">{% translate 'News' %}</a></li>
                     <li>
-                        <span class="opener">{% translate 'Blog Categories' %}</span>
+                        <span class="opener">{% translate 'News Categories' %}</span>
                         <ul>
                             {% for blog_category in blog_categories %}
                                 <li><a href="{% url 'content:blog_archive_by_category_pk' blog_category.pk %}">{{ blog_category.title }}</a></li>
@@ -127,7 +127,7 @@
                             <li><a href="{% url 'content:blog_create' %}">{% translate 'New Blog' %}</a></li>
                             <li><a href="{% url 'content:videocast_create' %}">{% translate 'New Videocast' %}</a></li>
                             <li><a href="{% url 'content:podcast_create' %}">{% translate 'New Podcast' %}</a></li>
-                            <li><a href="{% url 'content:skill_create' %}">{% translate 'New Skill' %}</a></li>
+                            <!-- <li><a href="{% url 'content:skill_create' %}">{% translate 'New Skill' %}</a></li> -->
                         </ul>
                     </li>
                     <li>
@@ -187,9 +187,7 @@
 
             <!-- Footer -->
             <footer id="footer">
-                <p class="copyright">
-                    &copy; Untitled. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>. CMS: <a
-                        href="https://github.com/mavenium/PyEditorial" title="PyEditorial">PyEditorial</a></p>
+                
             </footer>
             <!-- /Footer -->
 

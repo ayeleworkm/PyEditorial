@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'content.apps.ContentConfig',
     'allauth',
     'allauth.account',
+        'django.contrib.sites',
+
 
     
 ]
@@ -63,6 +65,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'PyEditorial.urls'
+
+SITE_ID = 1
+
 
 TEMPLATES = [
     {
@@ -184,6 +189,17 @@ MEDIA_URL = '/media/'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+ACCOUNT_SIGNUP_REDIRECT_URL = '/'  # Redirects to the home page
+
+
+
+# Disable email verification
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # Options: 'mandatory', 'optional', or 'none'
+
+
+
 
 # CKEditor
 CKEDITOR_UPLOAD_PATH = "uploads/"
