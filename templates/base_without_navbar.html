@@ -1,0 +1,87 @@
+{% load static %}
+{% load i18n %}
+{% get_media_prefix as MEDIA_URL %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ config.SITE_TITLE }}</title>
+    <meta name="description" content="{{ config.SITE_DESCRIPTION }}">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="{% static '/assets/css/main.css' %}"/>
+    <link rel="icon" href="{{ MEDIA_URL }}{{ config.SITE_FAVICON }}" type="image/png" sizes="16x16">
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            {% if request.user.is_superuser %}
+            <header id="header">
+                <a href="{% url 'content:index' %}" class="logo"><strong>{{ config.SITE_TITLE }}</strong></a>
+                <ul class="icons">
+                    {% if config.SOCIAL_NETWORKS_TWITTER_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_TWITTER_URL }}" class="icon brands fa-twitter"
+                               title="Twitter"><span class="label">{% translate 'Twitter' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_FACEBOOK_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_FACEBOOK_URL }}" class="icon brands fa-facebook-f"
+                               title="Facebook"><span class="label">{% translate 'Facebook' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_SNAPCHAT_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_SNAPCHAT_URL }}" class="icon brands fa-snapchat-ghost"
+                               title="Snapchat"><span class="label">{% translate 'Snapchat' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_INSTAGRAM_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_INSTAGRAM_URL }}" class="icon brands fa-instagram"
+                               title="Instagram"><span class="label">{% translate 'Instagram' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_MEDIUM_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_MEDIUM_URL }}" class="icon brands fa-medium-m"
+                               title="Medium"><span class="label">{% translate 'Medium' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_TELEGRAM_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_TELEGRAM_URL }}" class="icon brands fa-telegram"
+                               title="Telegram"><span class="label">{% translate 'Telegram' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_GITHUB_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_GITHUB_URL }}" class="icon brands fa-github"
+                               title="Github"><span class="label">{% translate 'Github' %}</span></a></li>
+                    {% endif %}
+                    {% if config.SOCIAL_NETWORKS_GITLAB_URL != '#' %}
+                        <li><a href="{{ config.SOCIAL_NETWORKS_GITLAB_URL }}" class="icon brands fa-gitlab"
+                               title="Gitlab"><span class="label">{% translate 'Gitlab' %}</span></a></li>
+                    {% endif %}
+                </ul>
+            </header>
+            {%endif %}
+            <!-- /Header -->
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<!-- Scripts -->
+<script src="{% static '/assets/js/jquery.min.js' %}"></script>
+<script src="{% static '/assets/js/browser.min.js' %}"></script>
+<script src="{% static '/assets/js/breakpoints.min.js' %}"></script>
+<script src="{% static '/assets/js/util.js' %}"></script>
+<script src="{% static '/assets/js/main.js' %}"></script>
+<!-- /Scripts -->
+
+{% block custom_script %}
+{% endblock custom_script %}
+
+</body>
+</html>

@@ -26,7 +26,7 @@ SECRET_KEY = '^rz9wrbb#ig!tl)4c$!o_^01ef8(rtxe(i()$ph61$8+mh^v_8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mathewoswondd.pythonanywhere.com']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
@@ -175,13 +175,13 @@ MEDIA_URL = '/media/'
 
 
 #email sender information
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'test.mailed.login@gmail.com'
-# EMAIL_HOST_PASSWORD = 'vsfgnbvlzrgjoqge'  
-# DEFAULT_FROM_EMAIL = 'Your Website <your-email@gmail.com>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'test.mailed.login@gmail.com'
+EMAIL_HOST_PASSWORD = 'vsfgnbvlzrgjoqge'  
+DEFAULT_FROM_EMAIL = 'test.malied.login@gmail.com'
 
 
 #django-allauth settings

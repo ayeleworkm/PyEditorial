@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+from .views import contact_view
+
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('blogs', views.Index.as_view(), name='index'),
@@ -21,6 +23,8 @@ urlpatterns = [
     path('create/podcast/', views.PodcastCreateView.as_view(), name='podcast_create'),
     path('podcast/<int:pk>/', views.PodArchiveByCategoryPK.as_view(), name='podcast_archive_by_category_pk'),
     path('podcast/<str:slug>/', views.PodSingle.as_view(), name='podcast_single'),
+    path('contact/', contact_view, name='contact'),
+
     # path('create/skill/', views.SkillCreateView.as_view(), name='skill_create'),
 
 ]

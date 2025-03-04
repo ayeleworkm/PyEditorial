@@ -1,6 +1,7 @@
 {%extends 'base.html' %}
 
 {% load static %}
+{% load i18n %}
 {% block content %}
 <html lang="en">
 <head>
@@ -10,9 +11,9 @@
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
 
 
-    <script src="{% static 'assets/js/home.js' %}" async>
-        
-    </script>
+    <script src="{% static 'assets/js/home.js' %}" async></script>
+
+
 </head>
 <body>
     <section class="home-sections" id="landing-page">
@@ -35,6 +36,13 @@
             </div>
         </div>
     </section>
+
+ {% include 'blog_view.html' %}
+ 
+
+
+
+
 </body>
 </html>
 {% endblock %}

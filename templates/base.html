@@ -87,6 +87,7 @@
                 </header>
                 <ul>
                     <li><a href="{% url 'content:home' %}">{% translate 'Home Page' %}</a></li>
+                    <li><a href="{% url 'content:contact' %}">{% translate 'Contact Us' %}</a></li>
                     <li><a href="{% url 'content:blog' %}">{% translate 'News' %}</a></li>
                     <li>
                         <span class="opener">{% translate 'News Categories' %}</span>
@@ -122,18 +123,20 @@
 
                     {% if request.user.is_superuser %}
                     <li>
-                        <span class="opener">{% translate 'Create New Objects' %}</span>
+                        <span class="opener">{% translate 'New Post' %}</span>
                         <ul>
-                            <li><a href="{% url 'content:blog_create' %}">{% translate 'New Blog' %}</a></li>
-                            <li><a href="{% url 'content:videocast_create' %}">{% translate 'New Videocast' %}</a></li>
-                            <li><a href="{% url 'content:podcast_create' %}">{% translate 'New Podcast' %}</a></li>
-                            <!-- <li><a href="{% url 'content:skill_create' %}">{% translate 'New Skill' %}</a></li> -->
+                            <li><a href="{% url 'content:blog_create' %}">{% translate 'Create News Post' %}</a></li>
+                            <li><a href="{% url 'content:videocast_create' %}">{% translate 'Create Videocast' %}</a></li>
+                            <li><a href="{% url 'content:podcast_create' %}">{% translate 'Create Podcast' %}</a></li>
+
+                            <!-- the line at the bottom has {} and %% sign  -->
+                            <!-- <li><a href="url 'content:skill_create' ">translate 'New Skill' </a></li> -->
                         </ul>
                     </li>
                     <li>
-                        <span class="opener">{% translate 'Create Category Object' %}</span>
+                        <span class="opener">{% translate 'Add New Category' %}</span>
                         <ul>
-                            <li><a href="{% url 'content:blog_category_create' %}">{% translate 'New Blog Category' %}</a></li>
+                            <li><a href="{% url 'content:blog_category_create' %}">{% translate 'New News Category' %}</a></li>
                             <li><a href="{% url 'content:videocast_category_create' %}">{% translate 'New Video Cast Category' %}</a></li>
                             <li><a href="{% url 'content:podcast_category_create' %}">{% translate 'New Podcast Category' %}</a></li>
                         </ul>
@@ -144,24 +147,6 @@
             </nav>
             <!-- /Menu -->
 
-            <!-- Section - podcast -->
-            <section id="podcast">
-                <header class="major">
-                    <h2>{% translate 'The latest Podcasts' %}</h2>
-                </header>
-                <div class="mini-posts">
-                    {% for podcast in podcasts %}
-                        <article>
-                            <a href="{% url 'content:podcast_single' podcast.slug %}" class="image">
-                                <img src="{{ podcast.thumbnail.url }}" alt="{{ podcast.title }}"/>
-                            </a>
-                            <p>{{ podcast.content | safe |truncatewords_html:15 }}</p>
-                            <a href="{% url 'content:podcast_single' podcast.slug %}" class="button">{% translate 'More' %}</a>
-                        </article>
-                    {% endfor %}
-                </div>
-            </section>
-            <!-- /Section - podcast -->
 
             {% if config.GET_IN_TOUCH_ACTIVE == 'yes' %}
                 <!-- get_in_touch -->

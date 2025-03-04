@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_without_navbar.html' %}
 {% load i18n %}
 
 {% block content %}
@@ -45,7 +45,7 @@
     <!-- /Section -->
 
     <!-- Section - blog -->
-     {% if blogs%}
+    {% if blogs%}
     <section id="blog">
         <header class="major">
             <h2>{% translate 'The latest News' %}</h2>
