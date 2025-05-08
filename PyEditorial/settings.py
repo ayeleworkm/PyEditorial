@@ -237,7 +237,8 @@ CONSTANCE_ADDITIONAL_FIELDS = {
 }
 
 CONSTANCE_CONFIG = {
-    'SITE_TITLE': ('My Blog', _('Title of this site!'), str),
+    # 'SITE_TITLE': ('My Blog', _('Title of this site!'), str),
+    'SITE_TITLE': ('FNOTE AMARA', str),
     'SITE_DESCRIPTION': ('Blog Description', _('Description of this site!'), str),
     'SITE_FAVICON': ('default_favicon.png', _('Favicon of this site!'), 'image_field'),
 

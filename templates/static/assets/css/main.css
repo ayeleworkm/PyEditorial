@@ -1931,7 +1931,8 @@ button,
   background-color: #f5f6f7;
   font-size: 0.9em;
   position: relative;
-  width: 26em; }
+  width: 26em; 
+}
   #sidebar h2 {
     font-size: 1.38889em; }
   #sidebar > .inner {
@@ -2114,6 +2115,7 @@ button,
   display: -webkit-flex;
   display: -ms-flex;
   display: flex; }
+
   #banner h1 {
     margin-top: -0.125em; }
   #banner .content {

@@ -9,16 +9,22 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="{% static '/assets/css/main.css' %}"/>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
     <link rel="icon" href="{{ MEDIA_URL }}{{ config.SITE_FAVICON }}" type="image/png" sizes="16x16">
 </head>
 <body class="is-preload">
 
-<!-- Wrapper -->
-<div id="wrapper">
-
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
+    <!-- Wrapper -->
+    <div id="wrapper">
+        
+        <!-- Main -->
+        <div id="main">
+            <a href="{% url 'content:home' %}">
+            <div style="width: 60px; z-index: 1000; position: fixed; top: calc(1.2vh + 1vw); right: 1rem;">
+                <img src="{% static '/images/logo.png' %}" alt="" style="width: inherit;">
+            </div>
+        </a>
+            <div class="inner">
 
             <!-- Header -->
             {% if request.user.is_superuser %}
@@ -67,11 +73,11 @@
 
         </div>
     </div>
-
+    
     <!-- Sidebar -->
     <div id="sidebar">
         <div class="inner">
-
+            
             <!-- Search -->
             <section id="search" class="alt">
                 <form method="GET" action="{% url 'content:search' %}">
@@ -178,7 +184,7 @@
 
         </div>
     </div>
-
+    
 </div>
 
 <!-- Scripts -->
