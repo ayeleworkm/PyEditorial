@@ -10,6 +10,98 @@
   
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
 
+    <style>
+        *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+        .slideshow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.mySlides {
+    display: none;
+    
+}
+
+
+
+.mySlides .text-container {
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5vw;
+    color: white;
+    
+}
+#text-container-1{
+    background-image: url('https://picsum.photos/id/1015/1200/400');
+    
+}
+#text-container-2{
+    background-image: url('https://picsum.photos/id/1016/1200/400');
+}
+#text-container-3{
+    background-image: url('https://picsum.photos/id/1018/1200/400');
+}
+
+
+.fade {
+    animation: fadeEffect 1s ease-in-out;
+}
+
+@keyframes fadeEffect {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 3rem;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev{
+    left: 0;
+    justify-content: flex-end;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+.image img{
+    
+}
+
+    </style>
 
     <script src="{% static 'assets/js/home.js' %}" async></script>
 
@@ -17,15 +109,35 @@
 </head>
 <body>
     <section class="home-sections" id="landing-page">
-        <div id="landing-page-image"></div>
+        <div class="slideshow-container">
+            
+            <div class="mySlides fade">
+                 <div class="text-container" id="text-container-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea reiciendis inventore amet doloremque id, aliquam veniam placeat sed debitis sapiente unde iste voluptatem totam quae laborum ipsa blanditiis cum molestias commodi! Consequatur libero nihil ipsam doloremque adipisci sapiente culpa necessitatibus laborum quo, quidem voluptates ea pariatur soluta quis dolor praesentium veritatis officiis nostrum beatae maiores? Officiis ea architecto laborum inventore soluta iusto tenetur modi qui sit vel molestiae nostrum error quam et sequi, quaerat quae consequuntur ducimus omnis est placeat fugit? In expedita praesentium dicta nulla molestias fugiat quos qui! Ea, vero. Officiis incidunt sit, iusto eveniet quibusdam enim ratione?</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="text-container" id="text-container-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores deserunt, placeat odit error pariatur obcaecati adipisci. Animi eligendi consectetur placeat, velit quod commodi. Dolore possimus fugiat eligendi alias dolorum in. Architecto, nobis commodi! Placeat nesciunt unde ab totam dolore numquam magni, laborum suscipit voluptas et nulla amet accusantium ipsam ratione porro non quidem sit iure sequi fugit quasi? Velit blanditiis ut dolorem minima obcaecati cupiditate iusto voluptatem, nihil eligendi fugiat tenetur natus nisi, dolor reiciendis nam similique dolores aperiam molestias beatae quasi veniam distinctio, officiis dolorum consectetur! Deserunt itaque nobis animi amet sapiente dicta officiis voluptates earum nam? Eligendi, ratione.</div>
+           </div>
+            
+           
+           <div class="mySlides fade">
+                <div class="text-container" id="text-container-3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos velit architecto laborum tempora soluta magni culpa iusto voluptas totam! Dignissimos dolor architecto ea delectus repellendus, deserunt laboriosam quis qui neque. Eveniet obcaecati itaque id necessitatibus ratione eius vel, est ad suscipit quam ullam, aliquid nulla asperiores reprehenderit nemo non nisi in sit fuga odit. Aspernatur beatae iure officiis architecto iusto similique obcaecati velit dicta expedita vitae fugit est, vel, pariatur impedit vero voluptatum, laudantium doloremque temporibus animi rem at qui. Odio ab, deserunt iure vel libero animi et mollitia, vero dolor veritatis totam quidem, laudantium a ratione quo nihil quos?</div>
+           </div>
+
+          
+        
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+        </div>
+        
+        <!-- <div id="landing-page-image"></div> -->
     </section>
-    <section class="home-sections">
+    <section>
 
         <div class="container">
 
             <div class="image-section">
                 <img src="https://picsum.photos/200/100" alt=""> 
-                
             </div>
             <div class="text-section">
                 <div class="tabs">
@@ -38,6 +150,35 @@
         </div>
     </section>
 
+
+    <script>
+        let slideIndex = 0;
+showSlides();
+
+function plusSlides(n) {
+    slideIndex += n;
+    showSlides(slideIndex);
+}
+
+function showSlides(n = slideIndex) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    if (n >= slides.length) slideIndex = 0;
+    if (n < 0) slideIndex = slides.length - 1;
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slides[slideIndex].style.display = "block";  
+}
+
+// Auto slide
+setInterval(() => {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 10000); // 10 seconds
+
+    </script>
  {% include 'blog_view.html' %}
  
 
