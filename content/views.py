@@ -18,26 +18,16 @@ class Home(View):
 
     def get(self, request, *args, **kwargs):
         context = {
-            'last_blog': models.Blog.objects.order_by('-pk').filter(publish=True)[:1],
+            # 'last_blog': models.Blog.objects.order_by('-pk').filter(publish=True)[:1],
             # 'skills': models.Skill.objects.all(),
-            'blogs': models.Blog.objects.order_by('-pk').filter(publish=True)[1:5],
-            'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
+            'blogs': models.Blog.objects.order_by('-pk').filter(publish=True)[0:5],
+            # 'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
         }
         return render(request, self.template_name, context)
 
 
 
-class Index(View):
-    template_name = 'index.html'
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            'last_blog': models.Blog.objects.order_by('-pk').filter(publish=True)[:1],
-            # 'skills': models.Skill.objects.all(),
-            'blogs': models.Blog.objects.order_by('-pk').filter(publish=True)[1:5],
-            'videocasts': models.Videocast.objects.order_by('-pk').filter(publish=True)[:4]
-        }
-        return render(request, self.template_name, context)
 
 
 
@@ -52,15 +42,15 @@ class Search(View):
                 'blogs': models.Blog.objects.order_by('-pk').filter(
                     Q(title__icontains=query) | Q(content__icontains=query)
                 ),
-                'videocasts': models.Videocast.objects.order_by('-pk').filter(
-                    Q(title__icontains=query) | Q(content__icontains=query)
-                ),
-                'podcasts': models.Podcast.objects.order_by('-pk').filter(
-                    Q(title__icontains=query) | Q(content__icontains=query)
-                )
+                # 'videocasts': models.Videocast.objects.order_by('-pk').filter(
+                #     Q(title__icontains=query) | Q(content__icontains=query)
+                # ),
+                # 'podcasts': models.Podcast.objects.order_by('-pk').filter(
+                #     Q(title__icontains=query) | Q(content__icontains=query)
+                # )
             }
         else:
-            return redirect('content:index')
+            return redirect('content:home')
         return render(request, self.template_name, context)
 
 
@@ -74,7 +64,7 @@ class BlogCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.Cr
     
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
+            return redirect('content:home')  # Redirect non-admin users from creating blogs
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -93,7 +83,7 @@ class BlogCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView
     
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
+            return redirect('content:home')  # Redirect non-admin users from creating blogs
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -113,102 +103,102 @@ class BlogSingle(generic.DetailView):
         return self.model.objects.filter(slug=self.kwargs['slug'])
 
 
-class VideocastCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
-    model = models.VideocastCategory
-    fields = '__all__'
-    success_message = 'Video cast category was created successfully'
+# class VideocastCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+#     model = models.VideocastCategory
+#     fields = '__all__'
+#     success_message = 'Video cast category was created successfully'
 
-    def get_success_url(self):
-        return reverse('content:videocast_category_create')
+#     def get_success_url(self):
+#         return reverse('content:videocast_category_create')
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
-        return super().dispatch(request, *args, **kwargs)
-
-
-class Videocast(generic.ListView):
-    model = models.Videocast
-    template_name = 'videocast_archive.html'
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.is_staff:
+#             return redirect('content:home')  # Redirect non-admin users from creating blogs
+#         return super().dispatch(request, *args, **kwargs)
 
 
-class VideocastCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
-    model = models.Videocast
-    fields = '__all__'
-    success_message = 'Video cast was created successfully'
+# class Videocast(generic.ListView):
+#     model = models.Videocast
+#     template_name = 'videocast_archive.html'
 
-    def get_success_url(self):
-        return reverse('content:videocast_create')
+
+# class VideocastCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+#     model = models.Videocast
+#     fields = '__all__'
+#     success_message = 'Video cast was created successfully'
+
+#     def get_success_url(self):
+#         return reverse('content:videocast_create')
     
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.is_staff:
+#             return redirect('content:home')  # Redirect non-admin users from creating blogs
+#         return super().dispatch(request, *args, **kwargs)
 
 
-class VideocastArchiveByCategoryPK(generic.ListView):
-    model = models.Videocast
-    template_name = 'videocast_archive.html'
+# class VideocastArchiveByCategoryPK(generic.ListView):
+#     model = models.Videocast
+#     template_name = 'videocast_archive.html'
 
-    def get_queryset(self):
-        return self.model.objects.filter(category=self.kwargs['pk'])
-
-
-class VideocastSingle(generic.DetailView):
-    model = models.Videocast
-    template_name = 'single.html'
-
-    def get_queryset(self):
-        return self.model.objects.filter(slug=self.kwargs['slug'])
+#     def get_queryset(self):
+#         return self.model.objects.filter(category=self.kwargs['pk'])
 
 
-class PodcastCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
-    model = models.PodcastCategory
-    fields = '__all__'
-    success_message = 'Podcast category was created successfully'
+# class VideocastSingle(generic.DetailView):
+#     model = models.Videocast
+#     template_name = 'single.html'
 
-    def get_success_url(self):
-        return reverse('content:podcast_category_create')
+#     def get_queryset(self):
+#         return self.model.objects.filter(slug=self.kwargs['slug'])
+
+
+# class PodcastCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+#     model = models.PodcastCategory
+#     fields = '__all__'
+#     success_message = 'Podcast category was created successfully'
+
+#     def get_success_url(self):
+#         return reverse('content:podcast_category_create')
     
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.is_staff:
+#             return redirect('content:home')  # Redirect non-admin users from creating blogs
+#         return super().dispatch(request, *args, **kwargs)
 
 
-class Podcast(generic.ListView):
-    model = models.Podcast
-    template_name = 'podcast_archive.html'
+# class Podcast(generic.ListView):
+#     model = models.Podcast
+#     template_name = 'podcast_archive.html'
 
 
-class PodcastCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
-    model = models.Podcast
-    fields = '__all__'
-    success_message = 'Podcast was created successfully'
+# class PodcastCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+#     model = models.Podcast
+#     fields = '__all__'
+#     success_message = 'Podcast was created successfully'
 
-    def get_success_url(self):
-        return reverse('content:podcast_create')
+#     def get_success_url(self):
+#         return reverse('content:podcast_create')
     
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('content:index')  # Redirect non-admin users from creating blogs
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         if not request.user.is_staff:
+#             return redirect('content:home')  # Redirect non-admin users from creating blogs
+#         return super().dispatch(request, *args, **kwargs)
 
 
-class PodArchiveByCategoryPK(generic.ListView):
-    model = models.Podcast
-    template_name = 'podcast_archive.html'
+# class PodArchiveByCategoryPK(generic.ListView):
+#     model = models.Podcast
+#     template_name = 'podcast_archive.html'
 
-    def get_queryset(self):
-        return self.model.objects.filter(category=self.kwargs['pk'])
+#     def get_queryset(self):
+#         return self.model.objects.filter(category=self.kwargs['pk'])
 
 
-class PodSingle(generic.DetailView):
-    model = models.Podcast
-    template_name = 'single.html'
+# class PodSingle(generic.DetailView):
+#     model = models.Podcast
+#     template_name = 'single.html'
 
-    def get_queryset(self):
-        return self.model.objects.filter(slug=self.kwargs['slug'])
+#     def get_queryset(self):
+#         return self.model.objects.filter(slug=self.kwargs['slug'])
 
 
 # class SkillCreateView(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
@@ -221,7 +211,7 @@ class PodSingle(generic.DetailView):
 
 #     def dispatch(self, request, *args, **kwargs):
 #         if not request.user.is_staff:
-#             return redirect('content:index')  # Redirect non-admin users from creating blogs
+#             return redirect('content:home')  # Redirect non-admin users from creating blogs
 #         return super().dispatch(request, *args, **kwargs)
 
 

@@ -22,8 +22,9 @@
 
             <!-- Header -->
             {% if request.user.is_superuser %}
-            <header id="header">
-                <a href="{% url 'content:index' %}" class="logo"><strong>{{ config.SITE_TITLE }}</strong></a>
+            <header>
+                <!-- removed {} and %% from bottom lines -->
+                <!-- <a href=" url 'content:index' " class="logo"><strong>{{ config.SITE_TITLE }}</strong></a> -->
                 <ul class="icons">
                     {% if config.SOCIAL_NETWORKS_TWITTER_URL != '#' %}
                         <li><a href="{{ config.SOCIAL_NETWORKS_TWITTER_URL }}" class="icon brands fa-twitter"

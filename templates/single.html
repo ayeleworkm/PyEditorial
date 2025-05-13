@@ -4,20 +4,21 @@
 {% block content %}
     <!-- Content -->
     <section>
-        <header class="main">
+        <header class="main" style="max-width: 50rem; margin:auto">
             <h1>{{ object.title }}</h1>
         </header>
-        <div class="text-box">
+
+        <span class="image main" style="max-width: 50rem; margin:auto; padding-bottom: 2rem">
+            <img src="{{ object.thumbnail.url }}" alt="{{ object.title }}">
+        </span>
+
+        <div class="text-box" style="max-width: 50rem; margin:auto">
         
             {{ object.content | safe }}
         </div>
         
         <div class="blog-wrapper">
 
-            <span class="image main">
-                <img src="{{ object.thumbnail.url }}" alt="{{ object.title }}" style="width: 20rem;">
-            </span>
-<div class="clear"></div>
 
         </div>
 

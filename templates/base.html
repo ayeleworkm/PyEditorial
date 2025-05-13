@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ config.SITE_TITLE }}</title>
+    <title>Fnote Amara</title>
     <meta name="description" content="{{ config.SITE_DESCRIPTION }}">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="{% static '/assets/css/main.css' %}"/>
     <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
-    <link rel="icon" href="{{ MEDIA_URL }}{{ config.SITE_FAVICON }}" type="image/png" sizes="16x16">
+    <!-- <link rel="icon" href="{{ MEDIA_URL }}{{ config.SITE_FAVICON }}" type="image/png" sizes="16x16"> -->
 </head>
 <body class="is-preload">
 
@@ -28,8 +28,9 @@
 
             <!-- Header -->
             {% if request.user.is_superuser %}
-            <header id="header">
-                <a href="{% url 'content:index' %}" class="logo"><strong>{{ config.SITE_TITLE }}</strong></a>
+            <header>
+                <!-- removed  %} and {% for the line below -->
+                <!-- <a href=" url 'content:home' " class="logo"><strong>{{ config.SITE_TITLE }}</strong></a> -->
                 <ul class="icons">
                     {% if config.SOCIAL_NETWORKS_TWITTER_URL != '#' %}
                         <li><a href="{{ config.SOCIAL_NETWORKS_TWITTER_URL }}" class="icon brands fa-twitter"
@@ -92,61 +93,109 @@
                     <h2>Menu</h2>
                 </header>
                 <ul>
-                    <li><a href="{% url 'content:home' %}">{% translate 'Home Page' %}</a></li>
-                    <li><a href="{% url 'content:contact' %}">{% translate 'Contact Us' %}</a></li>
-                    <li><a href="{% url 'content:blog' %}">{% translate 'News' %}</a></li>
+                    <li><a style="display: flex !important; align-items: center;" href="{% url 'content:home' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill="#f45a5a" d="M4 19v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-3q-.425 0-.712-.288T14 20v-5q0-.425-.288-.712T13 14h-2q-.425 0-.712.288T10 15v5q0 .425-.288.713T9 21H6q-.825 0-1.412-.587T4 19"/></svg>
+                        <span style="padding-left: .5rem;">{% translate 'Home Page' %}</span>
+                        
+                    </a>
+                    
+                    </li>
+
                     <li>
-                        <span class="opener">{% translate 'News Categories' %}</span>
+                        <a style="display: flex !important; align-items: center;" href="{% url 'content:contact' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44"/></svg>
+                            <span style="padding-left: .5rem">{% translate 'Contact Us' %}</span>
+                        </a>
+                    
+                    </li>
+
+                    <li><a style="display: flex !important; align-items: center;" href="{% url 'content:blog' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h11l5 5v11q0 .825-.587 1.413T19 21zm2-4h10v-2H7zm0-4h10v-2H7zm8-4h4l-4-4zM7 9h5V7H7z"/></svg>
+
+                        <span style="padding-left: 0.5rem">{% translate 'News' %}</span>
+                    </a>
+                </li>
+                
+                
+                <li>
+                
+                    <span class="opener">{% translate 'News Categories' %}</span>
                         <ul>
                             {% for blog_category in blog_categories %}
                                 <li><a href="{% url 'content:blog_archive_by_category_pk' blog_category.pk %}">{{ blog_category.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
-                    <li><a href="{% url 'content:videocast' %}">{% translate 'Videocast' %}</a></li>
-                    <li>
-                        <span class="opener">{% translate 'Videocast Categories' %}</span>
+                    <!-- <li><a href=" url 'content:videocast' "> translate 'Videocast' </a></li> -->
+                    <!-- <li>
+                        <span class="opener"> translate 'Videocast Categories' </span>
                         <ul>
-                            {% for videocast_category in videocast_categories %}
-                                <li><a href="{% url 'content:videocast_archive_by_category_pk' videocast_category.pk %}">{{ videocast_category.title }}</a></li>
-                            {% endfor %}
+                             for videocast_category in videocast_categories 
+                                <li><a href=" url 'content:videocast_archive_by_category_pk' videocast_category.pk ">{{ videocast_category.title }}</a></li>
+                             endfor 
                         </ul>
-                    </li>
-                    <li><a href="{% url 'content:podcast' %}">{% translate 'Podcast' %}</a></li>
-                    <li>
-                        <span class="opener">{% translate 'Podcast Categories' %}</span>
+                    </li> -->
+                    <!-- <li><a href=" url 'content:podcast' "> translate 'Podcast' </a></li> -->
+                    <!-- <li>
+                        <span class="opener"> translate 'Podcast Categories' </span>
                         <ul>
-                            {% for podcast_category in podcast_categories %}
-                                <li><a href="{% url 'content:podcast_archive_by_category_pk' podcast_category.pk %}">{{ podcast_category.title }}</a></li>
-                            {% endfor %}
+                             for podcast_category in podcast_categories 
+                                <li><a href=" url 'content:podcast_archive_by_category_pk' podcast_category.pk ">{{ podcast_category.title }}</a></li>
+                             endfor 
                         </ul>
-                    </li>
+                    </li> -->
                     {% if user.is_anonymous %}
-                    <li><a href="{% url 'account_login' %}">{% translate 'Login' %}</a></li>
+                    <li><a style="display: flex !important; align-items: center;" href="{% url 'account_login' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M12 21v-2h7V5h-7V3h7q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z"/></svg>
+                        <span style="padding-left: 0.5rem">
+                    {% translate 'Login' %}
+
+                </span>        
+                    </a>
+                </li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'account_logout' %}">{% translate 'Logout' %}</a></li>
+
+                    <li><a style="display: flex !important; align-items: center;" href="{% url 'account_logout' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"/></svg>
+                        <span style="padding-left: 0.5rem;">
+                        {% translate 'Logout' %}
+                        </span>
+                    
+                    </a>
+                    </li>
 
                     {% if request.user.is_superuser %}
-                    <li>
-                        <span class="opener">{% translate 'New Post' %}</span>
-                        <ul>
-                            <li><a href="{% url 'content:blog_create' %}">{% translate 'Create News Post' %}</a></li>
-                            <li><a href="{% url 'content:videocast_create' %}">{% translate 'Create Videocast' %}</a></li>
-                            <li><a href="{% url 'content:podcast_create' %}">{% translate 'Create Podcast' %}</a></li>
+                    
+                            <li><a style="display: flex !important; align-items: center;" href="{% url 'content:blog_create' %}">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
+                                <span style="padding-left: 0.5rem">{% translate 'Add new Post' %}</span>
+                                
 
+
+                            </a></li>
                             <!-- the line at the bottom has {} and %% sign  -->
+                            <!-- <li><a href=" url 'content:videocast_create' ">translate 'Create Videocast'</a></li>
+                            <li><a href=" url 'content:podcast_create' ">translate 'Create Podcast'</a></li> -->
+
                             <!-- <li><a href="url 'content:skill_create' ">translate 'New Skill' </a></li> -->
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="opener">{% translate 'Add New Category' %}</span>
-                        <ul>
-                            <li><a href="{% url 'content:blog_category_create' %}">{% translate 'New News Category' %}</a></li>
-                            <li><a href="{% url 'content:videocast_category_create' %}">{% translate 'New Video Cast Category' %}</a></li>
-                            <li><a href="{% url 'content:podcast_category_create' %}">{% translate 'New Podcast Category' %}</a></li>
-                        </ul>
-                    </li>
+                       
+                   
+        
+                        
+                            <li><a style="display: flex !important; align-items: center;" href="{% url 'content:blog_category_create' %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="none" stroke="#f45a5a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 3h6m-3-3v6"/></svg>
+                                <span style="padding-left: 0.5rem">
+                                    {% translate 'Create Category' %}
+
+                                </span>
+                            
+                            </a></li>
+                            <!-- <li><a href=" url 'content:videocast_category_create' "> translate 'New Video Cast Category' </a></li> -->
+                            <!-- <li><a href=" url 'content:podcast_category_create' "> translate 'New Podcast Category' </a></li> -->
+                        
+                   
                     {% endif %}
                     {% endif %}
                 </ul>

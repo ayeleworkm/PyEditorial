@@ -2,13 +2,109 @@
 {% load i18n %}
 
 {% block content %}
-    {% for last_post in last_blog %}
-        <!-- Banner -->
+
+<html>
+    <head>
+<style>
+    
+.custom-blog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1rem 0;
+}
+
+.custom-blog-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1 1 calc(33.333% - 2rem);
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+}
+
+.custom-blog-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-blog-image img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: filter 0.3s ease;
+}
+.custom-blog-image img:hover{
+    filter: brightness(80%);
+}
+
+
+.custom-blog-title {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #333;
+}
+
+.custom-blog-snippet {
+  margin: 1rem 0;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #555;
+  line-height: 1.5;
+}
+
+.custom-blog-actions {
+  margin-top: auto;
+}
+
+.custom-blog-button {
+  display: inline-block;
+  background-color: none;
+  border: 2px solid #f56a6a;
+  color: #f56a6a;
+  padding: 0.5rem 1.25rem;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+.custom-blog-button:hover{
+    background: #f56a6a;
+    color: #fff !important;
+}
+
+
+@media screen and (max-width: 768px) {
+  .custom-blog-card {
+    flex: 1 1 100%;
+  }
+}
+
+</style>
+    </head>
+    
+    <body>
+        
+        <!-- {% for last_post in last_blog %}
+        
+        
         <section id="banner">
             <div class="content">
                 <header>
                     <h1>{{ last_post.title }}</h1>
                 </header>
+                <span class="image object" id="last-thumbnail-container">
+                    <img id="last-thumbnail-image" src="{{ last_post.thumbnail.url }}" alt="{{ last_post.title }}" >
+                </span>
                 <p>{{ last_post.content | safe | truncatewords_html:30 }}</p>
                 <ul class="actions">
                     <li>
@@ -18,20 +114,16 @@
                     </li>
                 </ul>
             </div>
-            <span class="image object">
-                <img src="{{ last_post.thumbnail.url }}" alt="{{ last_post.title }}" style="height:auto;" >
-            </span>
         </section>
-        <!-- /Banner -->
-    {% endfor %}
-
-    <!-- Section - Skills -->
-    <!-- <section id="skills"> -->
-        <!-- <header class="major">
-            <h2>{% translate 'Skills' %}</h2>
-        </header>
-        <div class="features">
-            {% for skill in skills %}
+        {% endfor %} -->
+        
+        <!-- Section - Skills -->
+        <!-- <section id="skills"> -->
+            <!-- <header class="major">
+                <h2>{% translate 'Skills' %}</h2>
+            </header>
+            <div class="features">
+                {% for skill in skills %}
                 <article>
                     <span class="icon solid {{ skill.icon }}"></span>
                     <div class="content">
@@ -39,60 +131,71 @@
                         <p>{{ skill.description }}</p>
                     </div>
                 </article>
-            {% endfor %}
-        </div>
-    </section> -->
-    <!-- /Section -->
+                {% endfor %}
+            </div>
+        </section> -->
+        <!-- /Section -->
+        
+        <!-- Section - blog -->
+       {% if blogs %}
+<section id="blog">
+    <header class="major">
+        <h2>{% translate 'The latest News' %}</h2>
+    </header>
 
-    <!-- Section - blog -->
-    {% if blogs%}
-    <section id="blog">
-        <header class="major">
-            <h2>{% translate 'The latest News' %}</h2>
-        </header>
-        <div class="posts">
-            {% for blog_post in blogs %}
-                <article>
-                    <a href="{% url 'content:blog_single' blog_post.slug %}" class="image" title="{{ blog_post.title }}">
-                        <img src="{{ blog_post.thumbnail.url }}" alt="{{ blog_post.title }}"/>
-                    </a>
-                    <h3>{{ blog_post.title }}</h3>
-                    <p>{{ blog_post.content | safe | truncatewords_html:30 }}</p>
-                    <ul class="actions">
-                        <li>
-                            <a href="{% url 'content:blog_single' blog_post.slug %}" class="button" title="{{ blog_post.title }}">{% translate 'More' %}</a>
-                        </li>
-                    </ul>
-                </article>
-            {% endfor %}
+    <div class="custom-blog-grid">
+        {% for blog_post in blogs %}
+        <div class="custom-blog-card">
+            <div class="custom-blog-image">
+                <a href="{% url 'content:blog_single' blog_post.slug %}" class= title="{{ blog_post.title }}">
+                    <img src="{{ blog_post.thumbnail.url }}" alt="{{ blog_post.title }}" />
+                </a>
+            </div>
+            <h3 class="custom-blog-title">{{ blog_post.title }}</h3>
+            <p class="custom-blog-snippet">{{ blog_post.content | safe | truncatewords_html:30 }}</p>
+            <div class="custom-blog-actions">
+                <a href="{% url 'content:blog_single' blog_post.slug %}" class="custom-blog-button" title="{{ blog_post.title }}">
+                    {% translate 'More' %}
+                </a>
+            </div>
         </div>
-    </section>
-    {% endif %}
-    <!-- /Section - blog -->
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
-    <!-- Section - Video Cast -->
-     {% if videocasts %}
-    <section id="videocast">
-        <header class="major">
-            <h2>{% translate 'The latest Video Casts' %}</h2>
-        </header>
-        <div class="posts">
-            {% for videocast in videocasts %}
+        <!-- /Section - blog -->
+        
+        <!-- Section - Video Cast -->
+        
+        <!-- REPLACE THE BOTTOM LINES THAT HAVE [% with {%  -->
+        <!-- [% if videocasts %]
+        <section id="videocast">
+            <header class="major">
+                <h2>[% translate 'The latest Video Casts' %]</h2>
+            </header>
+            <div class="posts">
+                [% for videocast in videocasts %]
                 <article>
-                    <a href="{% url 'content:videocast_single' videocast.slug %}" class="image" title="{{ videocast.title }}">
+                    <a href="[% url 'content:videocast_single' videocast.slug %]" class="image" title="{{ videocast.title }}">
                         <img src="{{ videocast.thumbnail.url }}" alt="{{ videocast.title }}"/>
                     </a>
                     <h3>{{ videocast.title }}</h3>
                     <p>{{ videocast.content | safe | truncatewords_html:30 }}</p>
                     <ul class="actions">
                         <li>
-                            <a href="{% url 'content:videocast_single' videocast.slug %}" class="button" title="{{ videocast.title }}">{% translate 'More' %}</a>
+                            <a href="[% url 'content:videocast_single' videocast.slug %]" class="button" title="{{ videocast.title }}">[% translate 'More' %]</a>
                         </li>
                     </ul>
                 </article>
-            {% endfor %}
-        </div>
-    </section>
-    {% endif %}
-    <!-- /Section - Video Cast -->
+                [% endfor %]
+            </div>
+        </section>
+        [% endif %] -->
+        <!-- /Section - Video Cast -->
+    </body>
+</html>
+       
+
 {% endblock %}
+        
