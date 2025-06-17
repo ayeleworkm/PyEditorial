@@ -11,16 +11,21 @@
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
 
     <style>
-        *,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+        #navbar{
+            padding: 0 !important;
+
+        }
+        #navbar a {
+            color: white !important;
+
+        }
+        
+        #navbar a:hover{
+            color: #f45a5a !important;
+        }
         .slideshow-container {
     position: absolute;
-    top: 0;
+    top: 5rem;
     left: 0;
     width: 100vw;
     overflow: hidden;
@@ -106,6 +111,9 @@
 
 </head>
 <body>
+
+
+
     <section class="home-sections" id="landing-page">
         <div class="slideshow-container">
             

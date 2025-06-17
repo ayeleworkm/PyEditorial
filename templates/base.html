@@ -9,28 +9,70 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="{% static '/assets/css/main.css' %}"/>
-    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
-    <!-- <link rel="icon" href="{{ MEDIA_URL }}{{ config.SITE_FAVICON }}" type="image/png" sizes="16x16"> -->
+    <link rel="icon" href="{{ MEDIA_URL }}{{ config.SITE_FAVICON }}" type="image/png" sizes="16x16">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="is-preload">
-
-    <!-- Wrapper -->
-    <div id="wrapper">
-        
-        <!-- Main -->
-        <div id="main">
-            <a href="{% url 'content:home' %}">
-            <div style="width: 60px; z-index: 1000; position: fixed; top: calc(1.2vh + 1vw); right: 1rem;">
-                <img src="{% static '/images/logo.png' %}" alt="" style="width: inherit;">
+<nav style="background: #f45a5a; color: white;" class="text-white p-4" id="navbar">
+        <div class="container mx-auto flex items-center justify-between space-x-6">
+            <!-- Logo -->
+            <div class="text-2xl font-bold">
+                <a class="hover:bg-white" href="{% url 'content:home' %}">Fnote Amara</a>
             </div>
-        </a>
-            <div class="inner">
 
+            <!-- Navigation Links -->
+            <div class="hidden md:flex space-x-6">
+                <a class="nav-links hover:bg-white" href="{% url 'content:home' %}">{% translate 'Home' %}</a>
+                <a class="nav-links hover:bg-white" href="{% url 'content:home' %}">{% translate 'About' %}</a>
+                <a class="nav-links hover:bg-white" href="{% url 'content:home' %}">{% translate 'Services' %}</a>
+                <a class="nav-links hover:bg-white" href="{% url 'content:home' %}">{% translate 'Contact' %}</a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="flex items-center space-x-2">
+                <input  style="height: 2.5rem; color: black !important;" type="text" placeholder="{% translate 'Search...' %}" class="bg-gray-700 rounded-l-md px-4 py-2 focus:outline-none">
+                <button style="transform: translateX(-1rem); height: 2.7rem; background: white;" class="text-white px-4 py-2 ">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Login and Signup Buttons -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a style="color: #f45a5a !important" href="{% url 'content:home' %}" class="bg-white hover:bg-gray-200 px-4 py-2 rounded-md">{% translate 'Login' %}</a>
+                <a style="border: 2px solid white" href="{% url 'content:home' %}" class="hover:bg-white text-white px-4 py-2 rounded-md">{% translate 'Signup' %}</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button style="border: none !important;" id="mobile-menu-button" class="focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><path fill="#fff" d="M80 96h352v32H80zm0 144h352v32H80zm0 144h352v32H80z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden text-white p-4 space-y-2">
+            <a href="" class="block py-2 hover:text-gray-300">{% translate 'Home' %}</a>
+            <a href="" class="block py-2 hover:text-gray-300">{% translate 'News' %}</a>
+            <a href="" class="block py-2 hover:text-gray-300">{% translate 'Categories' %}</a>
+            <a href="" class="block py-2 hover:text-gray-300">{% translate 'Contact' %}</a>
+            <a href="" class="inline-block py-2 bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-md max-w-[150px] text-center">{% translate 'Login' %}</a>
+            <a href="" class="inline-block py-2 bg-green-500 hover:bg-green-600 text-white px-4 rounded-md max-w-[150px] text-center">{% translate 'Signup' %}</a>
+        </div>
+    </nav>
+  <!-- Wrapper -->
+<div id="wrapper">
+    <!-- Navbar -->
+    
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
             <!-- Header -->
             {% if request.user.is_superuser %}
             <header>
-                <!-- removed  %} and {% for the line below -->
-                <!-- <a href=" url 'content:home' " class="logo"><strong>{{ config.SITE_TITLE }}</strong></a> -->
                 <ul class="icons">
                     {% if config.SOCIAL_NETWORKS_TWITTER_URL != '#' %}
                         <li><a href="{{ config.SOCIAL_NETWORKS_TWITTER_URL }}" class="icon brands fa-twitter"
@@ -66,174 +108,13 @@
                     {% endif %}
                 </ul>
             </header>
-            {%endif %}
+            {% endif %}
             <!-- /Header -->
 
             {% block content %}
             {% endblock %}
-
         </div>
     </div>
-    
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <div class="inner">
-            
-            <!-- Search -->
-            <section id="search" class="alt">
-                <form method="GET" action="{% url 'content:search' %}">
-                    <input type="text" name="query" id="query" placeholder="{% translate 'Search' %}" required>
-                </form>
-            </section>
-            <!-- /Search -->
-
-            <!-- Menu -->
-            <nav id="menu">
-                <header class="major">
-                    <h2>Menu</h2>
-                </header>
-                <ul>
-                    <li><a style="display: flex !important; align-items: center;" href="{% url 'content:home' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill="#f45a5a" d="M4 19v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-3q-.425 0-.712-.288T14 20v-5q0-.425-.288-.712T13 14h-2q-.425 0-.712.288T10 15v5q0 .425-.288.713T9 21H6q-.825 0-1.412-.587T4 19"/></svg>
-                        <span style="padding-left: .5rem;">{% translate 'Home Page' %}</span>
-                        
-                    </a>
-                    
-                    </li>
-
-                    <li>
-                        <a style="display: flex !important; align-items: center;" href="{% url 'content:contact' %}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44"/></svg>
-                            <span style="padding-left: .5rem">{% translate 'Contact Us' %}</span>
-                        </a>
-                    
-                    </li>
-
-                    <li><a style="display: flex !important; align-items: center;" href="{% url 'content:blog' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h11l5 5v11q0 .825-.587 1.413T19 21zm2-4h10v-2H7zm0-4h10v-2H7zm8-4h4l-4-4zM7 9h5V7H7z"/></svg>
-
-                        <span style="padding-left: 0.5rem">{% translate 'News' %}</span>
-                    </a>
-                </li>
-                
-                
-                <li>
-                
-                    <span class="opener">{% translate 'News Categories' %}</span>
-                        <ul>
-                            {% for blog_category in blog_categories %}
-                                <li><a href="{% url 'content:blog_archive_by_category_pk' blog_category.pk %}">{{ blog_category.title }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    <!-- <li><a href=" url 'content:videocast' "> translate 'Videocast' </a></li> -->
-                    <!-- <li>
-                        <span class="opener"> translate 'Videocast Categories' </span>
-                        <ul>
-                             for videocast_category in videocast_categories 
-                                <li><a href=" url 'content:videocast_archive_by_category_pk' videocast_category.pk ">{{ videocast_category.title }}</a></li>
-                             endfor 
-                        </ul>
-                    </li> -->
-                    <!-- <li><a href=" url 'content:podcast' "> translate 'Podcast' </a></li> -->
-                    <!-- <li>
-                        <span class="opener"> translate 'Podcast Categories' </span>
-                        <ul>
-                             for podcast_category in podcast_categories 
-                                <li><a href=" url 'content:podcast_archive_by_category_pk' podcast_category.pk ">{{ podcast_category.title }}</a></li>
-                             endfor 
-                        </ul>
-                    </li> -->
-                    {% if user.is_anonymous %}
-                    <li><a style="display: flex !important; align-items: center;" href="{% url 'account_login' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M12 21v-2h7V5h-7V3h7q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z"/></svg>
-                        <span style="padding-left: 0.5rem">
-                    {% translate 'Login' %}
-
-                </span>        
-                    </a>
-                </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-
-                    <li><a style="display: flex !important; align-items: center;" href="{% url 'account_logout' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z"/></svg>
-                        <span style="padding-left: 0.5rem;">
-                        {% translate 'Logout' %}
-                        </span>
-                    
-                    </a>
-                    </li>
-
-                    {% if request.user.is_superuser %}
-                    
-                            <li><a style="display: flex !important; align-items: center;" href="{% url 'content:blog_create' %}">
-                                
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#f45a5a" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
-                                <span style="padding-left: 0.5rem">{% translate 'Add new Post' %}</span>
-                                
-
-
-                            </a></li>
-                            <!-- the line at the bottom has {} and %% sign  -->
-                            <!-- <li><a href=" url 'content:videocast_create' ">translate 'Create Videocast'</a></li>
-                            <li><a href=" url 'content:podcast_create' ">translate 'Create Podcast'</a></li> -->
-
-                            <!-- <li><a href="url 'content:skill_create' ">translate 'New Skill' </a></li> -->
-                       
-                   
-        
-                        
-                            <li><a style="display: flex !important; align-items: center;" href="{% url 'content:blog_category_create' %}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="none" stroke="#f45a5a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 3h6m-3-3v6"/></svg>
-                                <span style="padding-left: 0.5rem">
-                                    {% translate 'Create Category' %}
-
-                                </span>
-                            
-                            </a></li>
-                            <!-- <li><a href=" url 'content:videocast_category_create' "> translate 'New Video Cast Category' </a></li> -->
-                            <!-- <li><a href=" url 'content:podcast_category_create' "> translate 'New Podcast Category' </a></li> -->
-                        
-                   
-                    {% endif %}
-                    {% endif %}
-                </ul>
-            </nav>
-            <!-- /Menu -->
-
-
-            {% if config.GET_IN_TOUCH_ACTIVE == 'yes' %}
-                <!-- get_in_touch -->
-                <section id="get_in_touch">
-                    <header class="major">
-                        <h2>{% translate 'Get in touch' %}</h2>
-                    </header>
-                    <p>{{ config.GET_IN_TOUCH_INFO | safe }}</p>
-                    <ul class="contact">
-                        <li class="icon solid fa-envelope">
-                            <a href="mailto:{{ config.GET_IN_TOUCH_EMAIL_ADDRESS }}">{{ config.GET_IN_TOUCH_EMAIL_ADDRESS }}</a>
-                        </li>
-                        <li class="icon solid fa-phone">
-                            {{ config.GET_IN_TOUCH_PHONE }}
-                        </li>
-                        <li class="icon solid fa-home">
-                            {{ config.GET_IN_TOUCH_ADDRESS | safe }}
-                        </li>
-                    </ul>
-                </section>
-                <!-- /get_in_touch -->
-            {% endif %}
-
-            <!-- Footer -->
-            <footer id="footer">
-                
-            </footer>
-            <!-- /Footer -->
-
-        </div>
-    </div>
-    
 </div>
 
 <!-- Scripts -->
@@ -242,10 +123,15 @@
 <script src="{% static '/assets/js/breakpoints.min.js' %}"></script>
 <script src="{% static '/assets/js/util.js' %}"></script>
 <script src="{% static '/assets/js/main.js' %}"></script>
-<!-- /Scripts -->
-
+<script>
+    // Toggle mobile menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
 {% block custom_script %}
 {% endblock custom_script %}
-
 </body>
 </html>
